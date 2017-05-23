@@ -1,0 +1,27 @@
+subprojects {
+  apply plugin: 'java'
+
+  sourceSets {
+    sim {
+      java {
+        srcDirs "src/sim/java"
+      }
+      compileClasspath += main.output
+      runtimeClasspath += main.output
+    }
+  }
+  configurations {
+    simCompile.extendsFrom compile
+    simRuntime.extendsFrom simCompile, runtime
+    sim.extendsFrom simCompile
+  }
+
+  task simJar(type: Jar, dependsOn: simClasses) {
+    classifier = 'sim'
+    from sourceSets.sim.output
+  }
+
+  artifacts {
+    sim project.simJar
+  }
+}

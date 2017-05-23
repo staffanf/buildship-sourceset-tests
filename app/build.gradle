@@ -1,0 +1,11 @@
+apply plugin:"application"
+
+mainClassName = "SimApp"
+
+run {
+  classpath = sourceSets.sim.runtimeClasspath
+}
+
+dependencies {
+  simCompile project(path: ':sub', configuration: 'sim')
+}
