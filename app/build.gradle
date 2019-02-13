@@ -1,4 +1,5 @@
 apply plugin:"application"
+apply plugin:"eclipse"
 
 mainClassName = "SimApp"
 
@@ -9,3 +10,7 @@ run {
 dependencies {
   simCompile project(path: ':sub', configuration: 'sim')
 }
+
+// Work-around until issue https://github.com/eclipse/buildship/issues/476 is solved 
+eclipse.classpath.plusConfigurations << configurations.simCompile
+
